@@ -11,39 +11,28 @@ public class Solution {
     }
 
     public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
-        ListNode result = l1;
+        int digit_1 = 0;
+        int digit_2 = 0;
+
+        ListNode result = new ListNode(0);
+        ListNode toReturn = result;
         int remainder = 0;
-        while (l1 != null || l2 != null){
-            if (l1 != null && l2 != null){
-                int sum = l1.val + l2.val + remainder;
-                l1.val = sum % 10;
-                remainder = sum / 10;
+        while (l1 != null || l2 != null || remainder != 0){
+            result.next = new ListNode(0);
+            result = result.next;
 
-                if (l1.next == null && l2.next != null) {
-                    l1.next = new ListNode(0);
-                    l1 = l1.next;
-                }
-                else
-                    l1 = l1.next;
+            digit_1 = l1 != null ? l1.val : 0;
+            digit_2 = l2 != null ? l2.val : 0;
 
-                l2 = l2.next;
-                continue;
-            }
+            result.val = (digit_1 + digit_2 + remainder) % 10;
+            remainder = (digit_1 + digit_2 + remainder) / 10;
 
-            if (l1 != null && l2 == null){
-                int sum = l1.val + remainder;
-                l1.val = sum % 10;
-                remainder = sum / 10;
-                if (l1.next == null && remainder != 0){
-                    l1.next = new ListNode(remainder);
-                    l1 = l1.next;
-                    l1 = l1.next;
-                    continue;
-                }
-                l1 = l1.next;
-            }
+            if (l1 != null)
+                l1 = l1.next != null ? l1.next : null;
+            if (l2 != null)
+                l2 = l2.next != null ? l2.next : null;
         }
 
-        return result;
+        return toReturn.next;
     }
 }
