@@ -11,7 +11,7 @@ public class App
 {
     public static void main(String[] args) {
         Solution solution = new Solution();
-        String str = "dvdf";
+        String str = "abcabcbb";
         System.out.println(solution.lengthOfLongestSubstring(str));
     }
 }
