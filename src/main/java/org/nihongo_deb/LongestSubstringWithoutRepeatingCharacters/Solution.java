@@ -7,22 +7,12 @@ package org.nihongo_deb.LongestSubstringWithoutRepeatingCharacters;
  */
 public class Solution {
     public int lengthOfLongestSubstring(String s) {
-        StringBuilder maxStr = new StringBuilder();
+        int iterNum = s.length();
         int maxLength = 0;
-
-        for (int i = 0; i < s.length(); i++){
-            if (maxStr.toString().indexOf(s.charAt(i)) == -1){
-                maxStr.append(s.charAt(i));
-            } else {
-                if (maxLength < maxStr.toString().length()){
-                    maxLength = maxStr.toString().length();
-                }
-                maxStr = new StringBuilder();
-            }
-        }
-
-        if (maxLength < maxStr.toString().length()){
-            maxLength = maxStr.toString().length();
+        for (int i = 0; i < iterNum; i++){
+            char firstChar = s.charAt(0);
+            s = s.substring(1, s.length());
+            maxLength = s.indexOf(firstChar) == -1 ? Math.max(maxLength, s.length() + 1) : Math.max(maxLength, s.indexOf(firstChar) + 1);
         }
         return maxLength;
     }
