@@ -9,7 +9,8 @@ import java.util.List;
  * @created 17.03.2023
  */
 public class Solution {
-    public List<Integer> findMedianSortedArrays(int[] nums1, int[] nums2) {
+    public double findMedianSortedArrays(int[] nums1, int[] nums2) {
+        double result = 0.0;
         int globalArrayLength = nums1.length + nums2.length;
         List<Integer> globalArray = new ArrayList<>();
 
@@ -20,6 +21,9 @@ public class Solution {
         boolean done2 = false;
 
         for (int globalIndex = 0; globalIndex < globalArrayLength; globalIndex++) {
+            done1 = nums1Index >= nums1.length;
+            done2 = nums2Index >= nums2.length;
+
             if (!done1 && !done2){
                 if (nums1[nums1Index] < nums2[nums2Index]){
                     globalArray.add(nums1[nums1Index]);
@@ -46,11 +50,12 @@ public class Solution {
                 globalArray.add(nums2[nums2Index]);
                 nums2Index++;
             }
-
-            done1 = nums1Index == nums1.length;
-            done2 = nums2Index == nums2.length;
         }
 
-        return globalArray;
+        result = globalArrayLength % 2 == 1
+                ? globalArray.get(globalArrayLength / 2)
+                : (globalArray.get(globalArrayLength / 2) + globalArray.get(globalArrayLength / 2 - 1)) / 2.0;
+
+        return result;
     }
 }
