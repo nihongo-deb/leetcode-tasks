@@ -13,13 +13,14 @@ public class Solution {
             return s;
         int masterDelta = numRows - 2 + numRows;
         int additionalDelta = 0;
+        int nPic = numRows + numRows + numRows - 2;
 
         StringBuilder stringBuilder = new StringBuilder();
 
         for(int i = 0; i < numRows; i++){
             stringBuilder.append(s.charAt(i));
-            for(int k = i + masterDelta; k < s.length() + (s.length() % numRows); k += masterDelta){
-                if (additionalDelta != 0)
+            for(int k = i + masterDelta; k < s.length() + nPic; k += masterDelta){
+                if (additionalDelta != 0 && (k - additionalDelta) < s.length())
                     stringBuilder.append(s.charAt(k - additionalDelta));
                 if (k < s.length())
                     stringBuilder.append(s.charAt(k));
